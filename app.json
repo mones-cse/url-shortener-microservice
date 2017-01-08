@@ -1,0 +1,8 @@
+{
+  "name": "url-shortener",
+  "description": "url-shortener for free code camp project",
+  "repository": "git+https://github.com/mones-cse/mones-blog.git",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express"],
+  "image": "heroku/nodejs"
+}

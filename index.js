@@ -37,10 +37,14 @@ app.get('/new/:url(*)', function (req, res) {
                         console.log(data);
                         res.send({
                             original_url: data.actual_url,
-                            short_url: req.get('Host') + '/' + data.short_url
+                            short_url: req.get('protocol') ?  (req.get('protocol')+ '://'+req.get('Host') + '/' + data.short_url): (req.get('Host') + '/' + data.short_url)
                         });
                     })
                 } else {
+                    res.send({
+                            original_url: data.actual_url,
+                            short_url: data.short_url
+                        });
                     console.log("already iserted data");
                 }
             });
@@ -56,7 +60,6 @@ app.get('/:short_id', function (req, res) {
         if (err) throw err;
         if (data) {
             res.statusCode = 302;
-            console.log(data.actual_url);
             res.setHeader("Location", "" + data.actual_url);
             res.end();
         } else {
