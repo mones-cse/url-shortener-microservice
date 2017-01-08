@@ -18,6 +18,8 @@ app.listen(app.get('port'), function() {
 });
 
 
+var APP_URL = process.env.APP_URL|| 'http://localhost:8080/'
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/instruction.html');
 })
@@ -37,13 +39,13 @@ app.get('/new/:url(*)', function (req, res) {
                         console.log(data);
                         res.send({
                             original_url: data.actual_url,
-                            short_url: req.get('protocol') ?  (req.get('protocol')+ '://'+req.get('Host') + '/' + data.short_url): (req.get('Host') + '/' + data.short_url)
+                            short_url: APP_URL+data.short_url
                         });
                     })
                 } else {
                     res.send({
                             original_url: data.actual_url,
-                            short_url: data.short_url
+                            short_url: APP_URL+data.short_url
                         });
                     console.log("already iserted data");
                 }
