@@ -12,7 +12,11 @@ var short_url_schema = new mongoose.Schema({
 var Short_url = mongoose.model('Short_url', short_url_schema);
 
 var app = express();
-app.listen(8080);
+app.set('port',(process.env.PORT || 8080))
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
+
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/instruction.html');
