@@ -1,9 +1,11 @@
+//modules
 var express = require('express');
 var validUrl = require('valid-url');
 var Base62 = require('base62');
 require('dotenv').config();
-
 var mongoose = require('mongoose');
+
+//mongo setup
 mongoose.connect(process.env.MLAB_URL);
 var short_url_schema = new mongoose.Schema({
     actual_url: String,
@@ -11,14 +13,17 @@ var short_url_schema = new mongoose.Schema({
 })
 var Short_url = mongoose.model('Short_url', short_url_schema);
 
+
+//app
+var APP_URL = process.env.APP_URL|| 'http://localhost:8080/'
+
 var app = express();
 app.set('port',(process.env.PORT || 8080))
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-
-var APP_URL = process.env.APP_URL|| 'http://localhost:8080/'
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/instruction.html');
